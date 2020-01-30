@@ -35,17 +35,11 @@ def apply_coupons(cart, coupons)
   # Consult README for inputs and outputs
   #
   # REMEMBER: This method **should** update cart
-  coupons.each do |coupon|
-    newcoupon = {}
-    newcoupon[:item] = coupon[:item] + " W/COUPON"
-    newcoupon[:count] = coupon[:num]
-    newcoupon[:price] = (coupon[:cost]/coupon[:count]).round(2)
-    olditem = find_item_by_name_in_collection(coupon[:item], cart)
-    newcoupon[:clearance] = olditem[:clearance]
-    cart[olditem[:item]][:count] = cart[olditem[:item]][:count] - newcoupon[:count]
-    cart << newcoupon
+  counter = 0
+  while counter < coupons.length
+    cart_item = find_item_by_name_in_collection(coupons[counter][:item], cart)
+    counter += 1
   end
-  cart
 end
 
 def apply_clearance(cart)
